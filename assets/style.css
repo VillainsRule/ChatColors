@@ -1,0 +1,233 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,700|Titan+One|Creepster|Satisfy|Eczar:700);
+
+body {
+    background-color: #301f5b;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+}
+
+nav {
+    height: 10vh;
+    width: 95%;
+    background-color: #1c152e;
+    position: absolute;
+    top: 2vh;
+    left: 2.5%;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.siteName {
+    font-family: 'Titan One';
+    font-size: 5vh;
+    display: inline-block;
+    position: absolute;
+    left: 1vw;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.siteCredits {
+    font-size: 3vh;
+    display: inline-block;
+    position: absolute;
+    right: 1vw;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.golden {
+    color: yellow;
+}
+
+.modeSelector {
+    position: absolute;
+    top: 15vh;
+    width: 50%;
+    left: 25%;
+    padding: 15px 0 15px 0;
+    display: flex;
+    justify-content: center;
+    gap: 5vw;
+    font-size: 4.5vh;
+    font-weight: 800;
+}
+
+.mode {
+    cursor: pointer;
+}
+
+.content {
+    position: absolute;
+    top: 30vh;
+    width: 80%;
+    left: 10%;
+    border: 5px solid white;
+    border-radius: 7px;
+    height: 60vh;
+}
+
+.content {
+    display: none;
+    text-align: center;
+}
+
+.quickInfo {
+    margin-top: 35px;
+    font-size: 5vh;
+}
+
+.premadeCodes {
+    margin: 20px 10px 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: auto;
+    height: 70%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.premadeCodes::-webkit-scrollbar {
+    display: none;
+}
+
+.premadeCode {
+    height: 65px;
+    width: 65px;
+    border: 2px solid white;
+    margin: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.premadeCode:hover {
+    transform: scale(0.9);
+}
+
+.icon {
+    font-size: 3vh;
+    border: 3px solid white;
+    border-radius: 50%;
+    width: 5vh;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.creator {
+    margin: 20px 10px 0 10px;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.smallInfo {
+    margin: 5px 10px 0 10px;
+}
+
+.makerBar {
+    margin: 20px 10px 0 10px;
+    display: flex;
+    justify-content: center;
+    gap: 3vw;
+    overflow: hidden;
+}
+
+.gradientBar {
+    justify-content: space-evenly !important;
+    height: 5vh;
+    border-radius: 5rem;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    user-select: none;
+    border: 3px solid white;
+    width: 50vw;
+}
+
+.gradientBarDot {
+    height: 100%;
+    width: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+.gradientBarDot::before {
+    position: absolute;
+    z-index: 99;
+    content: '';
+    border: 1px solid white;
+    border-radius: 50%;
+    height: 5vh;
+    width: 5vh;
+    background: var(--color);
+}
+
+.gradientPreview {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.createButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    width: 20vw;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.genBar {
+    margin-top: 20px;
+}
+
+.blookName {
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 40vw;
+    font-size: 3vh;
+    color: white;
+    text-align: center;
+    font-family: 'Nunito';
+    padding: 10px 0;
+}
+
+.blookName:focus {
+    outline: none;
+}
+
+.genFromBlook {
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 12vw;
+    font-size: 3vh;
+    color: white;
+    text-align: center;
+    font-family: 'Nunito';
+    padding: 10px 0;
+    margin-left: 5vw;
+    cursor: pointer;
+}
+
+.generatingMessage {
+    margin-top: 20px;
+    display: none;
+}

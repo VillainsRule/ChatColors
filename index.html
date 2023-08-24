@@ -1,0 +1,73 @@
+<head>
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/squares.css">
+    <link rel="stylesheet" href="./assets/modal.css">
+
+    <link href="https://kit-pro.fontawesome.com/releases/v6.4.0/css/pro.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.min.js"></script>
+    
+    <link rel="icon" href="https://blacket.org/content/logo.png">
+    <title>BlacketColorCodes | the makerspace of chat colors!</title>
+</head>
+
+<body>
+    <nav>
+        <div class="siteName">blacket color codes</div>
+        <div class="siteCredits">built by death & acai</div>
+    </nav>
+
+    <ul class="squares">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <div class="modeSelector">
+        <div class="mode" id="premadeMode">premade</div>
+        <div class="divider">|</div>
+        <div class="mode" id="customMode">custom</div>
+        <div class="divider">|</div>
+        <div class="mode" id="fromBlookMode">blook</div>        
+    </div>
+
+    <div class="content" id="premadeContent">
+        <div class="quickInfo">click a gradient to copy...</div>
+        <div class="premadeCodes"></div>
+    </div>
+
+    <div class="content" id="selfmadeContent">
+        <div class="quickInfo">make your own gradient!</div>
+        <div class="smallInfo">the arrow will change the gradient direction. the bar will preview the gradient. the plus will add a new dot to the bar. right click a dot to remove.</div>
+        <div class="creator">
+            <div class="makerBar">
+                <div class="icon" id="arrowIcon"><i class="fas fa-arrow-up"></i></div>
+                <div class="gradientBar"></div>
+                <div class="icon" id="plusIcon"><i class="fas fa-plus"></i></div>
+            </div>
+        </div>
+
+        <div class="createButton">Generate!</div>
+    </div>
+
+    <div class="content" id="fromBlookContent">
+        <div class="quickInfo">gradient from a blook</div>
+        <div class="smallInfo">inspired by death's golden apple and blue gummy worm gradients.</div>
+        
+        <div class="genBar">
+            <input class="blookName">
+            <button class="genFromBlook">Submit</button>
+        </div>
+
+        <div class="generatingMessage">generating gradient...</div>
+    </div>
+
+    <script src="./assets/script.js"></script>
+</body>
