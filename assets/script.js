@@ -22,26 +22,25 @@ document.querySelector('#premadeMode').onclick = () => {
     const premadeCodes = {
         rainbow: `localStorage.setItem('chatColor', 'gradient=[25deg: #f20505, #f26c05, #f2da05, #74f205, #05f28b, #05a7f2, #050df2]')`,
         'shades of grey': `localStorage.setItem('chatColor', 'gradient=[25deg: #fcfcfc, #050505]')`,
-        'firey red': `localStorage.setItem('chatColor', 'gradient=[25deg: #f20505, #f26c05, #f2da05]')`,
-        'bright cyan': `localStorage.setItem('chatColor', 'gradient=[25deg: #b5fffd, #8cfffc, #77ebfc, #68ceed]')`,
         'rich gold': `localStorage.setItem('chatColor', 'gradient=[25deg: #f2d64b, #967e0b]')`,
         death: `localStorage.setItem('chatColor', 'gradient=[25deg: #ed1005, #0a0100]')`,
         'watching the sunset': `localStorage.setItem('chatColor', 'gradient=[195deg: #FFA41C, #FF24BD]')`,
         beach: `localStorage.setItem('chatColor', 'gradient=[75deg: #FAFF5C, #98FFF5]')`,
-        striped: `localStorage.setItem('chatColor', 'gradient=[165deg: #5E38F7, #000000, #5E38F7, #000000, #5E38F7, #000000, #5E38F7]')`,
-        passion: `localStorage.setItem('chatColor', 'gradient=[100deg: #fc1303, #9e0d03]')`,
-        'blood orange': `localStorage.setItem('chatColor', 'gradient=[100deg: #fa7b05, #ad5605]')`,
-        'ice cold': `localStorage.setItem('chatColor', 'gradient=[25deg: #bef7e7, #b5f5ec, #abeaed, #a5e7f0, #9edaf0]')`,
-        'cotton candy': `localStorage.setItem('chatColor', 'gradient=[40deg: #ffbcd9, #A0D9EF]')`,
-        'pretty in pastel': `localStorage.setItem('chatColor', 'gradient=[90deg: #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff]')`,
         'preposterous purple': `localStorage.setItem('chatColor', 'gradient=[right: #e0c3fc, #8ec5fc]')`,
+        'mega bot': `localStorage.setItem('chatColor', 'gradient=[90deg: #d71f27, #f7942c]')`,
+        'dark dragon': `localStorage.setItem('chatColor', 'gradient=[90deg: #5a2081, #2d2635]')`,
+        'golden crab': `localStorage.setItem('chatColor', 'gradient=[90deg: #9f7802, #f7dec7]')`,
+        'golden gift': `localStorage.setItem('chatColor', 'gradient=[90deg: #e8c911, #9a00b2, #e8c911]')`,
+        'tropical pig': `localStorage.setItem('chatColor', 'gradient=[90deg: #e6ca89, #f7a9e1, #76eafe]')`
     };  
 
     Object.entries(premadeCodes).forEach(async (code) => {
-        document.querySelector('.premadeCodes').insertAdjacentHTML('beforeend', `<div class="premadeCode" style="background: ${parseCode(code[1])};" id=${code[0].replace(/ /g, '_')}></div>`);
-
-        document.getElementById(code[0].replace(/ /g, '_')).onmouseover = () => document.querySelector('.quickInfo').innerHTML = `click to copy ${code[0]}`;
-        document.getElementById(code[0].replace(/ /g, '_')).onmouseout = () => document.querySelector('.quickInfo').innerHTML = `click a gradient to copy...`;
+        document.querySelector('.premadeCodes').insertAdjacentHTML('beforeend', `
+            <div class="premadeCodeRow" id=${code[0].replace(/ /g, '_')}>
+                <div class="premadeCode" style="background: ${parseCode(code[1])};"></div>
+                <div class="premadeCodeText">${code[0]}</div>
+            </div>
+        `);
         
         document.getElementById(code[0].replace(/ /g, '_')).onclick = async () => {
             await navigator.clipboard.writeText(code[1]);
@@ -56,7 +55,7 @@ document.querySelector('#customMode').onclick = () => {
     document.querySelector('#selfmadeContent').style.display = 'block';
     document.querySelector('#fromBlookContent').style.display = 'none';
 
-    let cAngle = 8;
+    let cAngle = 0;
     let angles = [
         10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170,
         180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320,

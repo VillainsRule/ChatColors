@@ -33,10 +33,21 @@ nav {
     font-size: 3vh;
     display: inline-block;
     position: absolute;
-    right: 1vw;
+    right: 6.5vw;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+}
+
+.outerDiscordIcon {
+    font-size: 6vh;
+    display: inline-block;
+    position: absolute;
+    right: 1.25vw;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: white;
 }
 
 .golden {
@@ -82,9 +93,9 @@ nav {
 
 .premadeCodes {
     margin: 20px 10px 0 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, 2fr);
     overflow: auto;
     height: 70%;
     -ms-overflow-style: none;
@@ -95,18 +106,29 @@ nav {
     display: none;
 }
 
+.premadeCodeRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.premadeCodeRow:hover {
+    transform: scale(0.9);
+}
+
 .premadeCode {
     height: 65px;
     width: 65px;
     border: 2px solid white;
     margin: 10px;
     border-radius: 20px;
-    cursor: pointer;
-    transition: 0.25s;
 }
 
-.premadeCode:hover {
-    transform: scale(0.9);
+.premadeCodeText {
+    font-size: 5vh;
 }
 
 .icon {
