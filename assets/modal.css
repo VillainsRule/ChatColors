@@ -65,10 +65,13 @@
 
 .modal-buttons {
     display: flex;
-    gap: 0.5vw;
+    gap: 15px;
     margin-top: 25px;
+}
+
+.modal-button {
     border: 1px dashed white;
-    padding: 10px 30px;
     border-radius: 10px;
     cursor: pointer;
+    padding: 10px 25px;
 }

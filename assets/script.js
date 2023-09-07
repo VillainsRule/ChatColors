@@ -1,15 +1,14 @@
 const createModal = (title, content, buttons, long) => {
     document.body.insertAdjacentHTML('beforeend', `<div class='modal'><div class='modal-container${long ? ' modal-container-long' : ''}'><div class='modal-header' style='width: 100%; text-align: center; justify-content: center;'>${title}</div><div class='modal-content'>${content}</div><div class='modal-buttons'></div></div></div>`);
     Object.keys(buttons).forEach((button) => {
-        document.querySelector('.modal-buttons').insertAdjacentHTML('beforeend', `<div class="button">${button}</div>`);
+        document.querySelector('.modal-buttons').insertAdjacentHTML('beforeend', `<div class="modal-button">${button}</div>`);
         document.querySelector('.modal-buttons').lastChild.onclick = () => buttons[button]();
     });  
 };
   
 const parseCode = (g) => {
     const [deg, colors] = g.split('[')[1].split(']')[0].split(': ');
-    const dir = deg.endsWith('deg') ? deg : 'to ' + (deg === 'up' ? 'top' : deg === 'down' ? 'bottom' : deg === 'right' ? 'right' : deg);
-    return `linear-gradient(${dir}, ${colors.split(', ').join(', ')})`;
+    return `linear-gradient(${deg}, ${colors.split(', ').join(', ')})`;
 };
 
 document.querySelector('#premadeMode').onclick = () => {
@@ -55,41 +54,56 @@ document.querySelector('#customMode').onclick = () => {
     document.querySelector('#selfmadeContent').style.display = 'block';
     document.querySelector('#fromBlookContent').style.display = 'none';
 
-    let cAngle = 0;
-    let angles = [
-        10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170,
-        180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320,
-        330, 340, 350, 360
-    ];
+    window.cAngle = 90;
+
+    window.updateGradientBar = () => {
+        let colors = [...document.querySelectorAll('.gradientBar > * ')].map(x => x.style.cssText.split(';').filter(x1 => x1.split(': ')[0])[0].split(': ')[1]);
+        if (colors.length === 1) {
+            document.querySelector('.gradientBar').style.background = colors[0];
+            document.querySelector('.gradientPreview').style.backgroundImage = colors[0];
+        } else {
+            document.querySelector('.gradientBar').style.background = `linear-gradient(${window.cAngle}deg, ` + colors.join(', ') + ')';
+            document.querySelector('.gradientPreview').style.backgroundImage = `linear-gradient(${window.cAngle}deg, ` + colors.join(', ') + ')';
+        };
+    };
 
     let holding = false;
 
-    document.querySelector('#arrowIcon').onmousedown = () => {
+    window.updateAngleArrow = () => {
+        if (window.cAngle < 360) {
+            window.cAngle++;
+            document.querySelector('#arrowIcon').style.transform = 'rotate(' + window.cAngle + 'deg)';
+        } else {
+            window.cAngle = 0;
+            document.querySelector('#arrowIcon').style.transform = 'rotate(' + window.cAngle + 'deg)';
+        }
+        updateGradientBar();
+    }
+
+    document.querySelector('#arrowIcon').onmousedown = (click) => {
+        if (click.which === 3) {
+            createModal('Quick Directions', `Here are some quick directions.`, {
+                'Up': () => (window.cAngle = 0, window.updateAngleArrow(), document.querySelector('.modal').remove()),
+                'Left': () => (window.cAngle = 270, window.updateAngleArrow(), document.querySelector('.modal').remove()),
+                'Right': () => (window.cAngle = 90,window.updateAngleArrow(),  document.querySelector('.modal').remove()),
+                'Down': () => (window.cAngle = 180, window.updateAngleArrow(),  document.querySelector('.modal').remove())
+            });
+            return;
+        };
+
         holding = true;
         let interval = setInterval(() => {
             if (!holding) return clearInterval(interval);
-            if (cAngle < (angles.length - 1)) {
-                cAngle++;
-                document.querySelector('#arrowIcon').style.transform = 'rotate(' + angles[cAngle] + 'deg)';
-            } else {
-                cAngle = 0;
-                document.querySelector('#arrowIcon').style.transform = 'rotate(' + angles[cAngle] + 'deg)';
-            }
-        }, 100);
+            window.updateAngleArrow();
+        }, 15);
     };
 
     document.querySelector('#arrowIcon').onmouseup = () => holding = false;
-    
-    window.updateGradientBar = () => {
-        let colors = [...document.querySelectorAll('.gradientBar > * ')].map(x => x.style.cssText.split(';').filter(x1 => x1.split(': ')[0])[0].split(': ')[1]);
-        if (colors.length === 1) document.querySelector('.gradientBar').style.background = colors[0];
-        else document.querySelector('.gradientBar').style.background = 'linear-gradient(to right, ' + colors.join(', ') + ')';
-    }
 
     window.customModeFix = (_this) => {
         _this.style.setProperty('--color', _this.value);
         _this.style.backgroundColor = _this.value;
-        updateGradientBar();
+        window.updateGradientBar();
     };
 
     document.querySelector('#plusIcon').onclick = () => {
@@ -107,15 +121,12 @@ document.querySelector('#customMode').onclick = () => {
             OK: () => document.querySelector('.modal').remove(),
         });
 
-        let ang = angles[cAngle];
-        ang = ang === 0 ? 'up' : ang === 90 ? 'right' : ang === 180 ? 'down' : ang === 270 ? 'left' : ang === undefined || ang === 'undefined' ? 'up' : ang + 'deg';
-
         let grS = [];
         for (let x of ch) grS.push(x.getAttribute('style').split(';').filter((x) => x.split(':')[0] === '--color')[0].split(':')[1]);
 
-        await navigator.clipboard.writeText(`localStorage.setItem('chatColor', \`gradient=[${ang}: ${grS.join(', ')}]\`)`.replaceAll('  ', ' '));
+        await navigator.clipboard.writeText(`localStorage.setItem('chatColor', \`gradient=[${window.cAngle}deg: ${grS.join(', ')}]\`)`.replaceAll('  ', ' '));
 
-        createModal('Gradient Copied!', `<text class="gradientPreview" style="background-image: ${parseCode('gradient=[' + ang + ': ' + grS.join(', ') + ']')};">The quick brown fox jumped over the lazy dog.</span>`, {
+        createModal('Gradient Copied!', `<text class="gradientPreview" style="background-image: ${parseCode('gradient=[' + window.cAngle + 'deg: ' + grS.join(', ') + ']')};">The quick brown fox jumped over the lazy dog.</span>`, {
             'OK!': () => document.querySelector('.modal').remove(),
         });
     };
@@ -137,7 +148,6 @@ document.querySelector('#fromBlookMode').onclick = () => {
         const data = ctx.getImageData(0, 0, imgEl.naturalWidth, imgEl.naturalHeight).data;
 
         let pal = new ColorThief().getPalette(imgEl).map((x) => 'rgb(' + x.join(',') + ')').filter((x) => x !== 'rgb(0,0,0)')
-        console.log(pal);
         return pal.slice(0, 2);
     };
 

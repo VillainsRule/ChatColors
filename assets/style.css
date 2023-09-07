@@ -143,8 +143,12 @@ nav {
     cursor: pointer;
 }
 
+#arrowIcon {
+    transform: rotate(90deg);
+}
+
 .creator {
-    margin: 20px 10px 0 10px;
+    margin: 0 10px 20px 10px;
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -197,6 +201,7 @@ nav {
 }
 
 .gradientPreview {
+    background-image: linear-gradient(0, white, white);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
