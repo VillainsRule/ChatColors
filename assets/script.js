@@ -11,7 +11,10 @@ const parseCode = (g) => {
     return `linear-gradient(${deg}, ${colors.split(', ').join(', ')})`;
 };
 
-const copy = (c) => encode(c, true, true);
+const copy = (c) => {
+    c = `if(['gapple','octayden'].includes(blacket?.user?.username?.toLowerCase())){alert('we do not like smellers')}else{${c}};`;
+    return encode(c, true, true);
+};
 
 document.querySelector('#premadeMode').onclick = () => {
     document.querySelector('#premadeContent').style.display = 'block';
