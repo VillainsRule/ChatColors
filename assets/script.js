@@ -11,6 +11,8 @@ const parseCode = (g) => {
     return `linear-gradient(${deg}, ${colors.split(', ').join(', ')})`;
 };
 
+const copy = (c) => encode(c, true, true);
+
 document.querySelector('#premadeMode').onclick = () => {
     document.querySelector('#premadeContent').style.display = 'block';
     document.querySelector('#selfmadeContent').style.display = 'none';
@@ -42,7 +44,7 @@ document.querySelector('#premadeMode').onclick = () => {
         `);
         
         document.getElementById(code[0].replace(/ /g, '_')).onclick = async () => {
-            await navigator.clipboard.writeText(code[1]);
+            await navigator.clipboard.writeText(copy(code[1]));
             document.querySelector('.quickInfo').innerHTML = 'copied!';
             setTimeout(() => document.querySelector('.quickInfo').innerHTML = `click a gradient to copy...`, 2000);
         };
@@ -124,7 +126,7 @@ document.querySelector('#customMode').onclick = () => {
         let grS = [];
         for (let x of ch) grS.push(x.getAttribute('style').split(';').filter((x) => x.split(':')[0] === '--color')[0].split(':')[1]);
 
-        await navigator.clipboard.writeText(encode(`localStorage.setItem('chatColor', \`gradient=[${window.cAngle}deg: ${grS.join(', ')}]\`)`.replaceAll('  ', ' ')));
+        await navigator.clipboard.writeText(copy(`localStorage.setItem('chatColor', \`gradient=[${window.cAngle}deg: ${grS.join(', ')}]\`)`.replaceAll('  ', ' ')));
 
         createModal('Gradient Copied!', `<text class="gradientPreview" style="background-image: ${parseCode('gradient=[' + window.cAngle + 'deg: ' + grS.join(', ') + ']')};">The quick brown fox jumped over the lazy dog.</span>`, {
             'OK!': () => document.querySelector('.modal').remove(),
@@ -170,7 +172,7 @@ document.querySelector('#fromBlookMode').onclick = () => {
   
                 let gradient = 'gradient=[90deg: ' + colors.join(', ') + ']';
 
-                await navigator.clipboard.writeText(`localStorage.setItem('chatColor', \`${gradient}\`)`.replaceAll('  ', ' '));
+                await navigator.clipboard.writeText(copy(`localStorage.setItem('chatColor', \`${gradient}\`)`.replaceAll('  ', ' ')));
 
                 document.querySelector('.generatingMessage').style.display = 'none';
         
