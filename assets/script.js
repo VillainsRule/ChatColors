@@ -124,7 +124,7 @@ document.querySelector('#customMode').onclick = () => {
         let grS = [];
         for (let x of ch) grS.push(x.getAttribute('style').split(';').filter((x) => x.split(':')[0] === '--color')[0].split(':')[1]);
 
-        await navigator.clipboard.writeText(`localStorage.setItem('chatColor', \`gradient=[${window.cAngle}deg: ${grS.join(', ')}]\`)`.replaceAll('  ', ' '));
+        await navigator.clipboard.writeText(encode(`localStorage.setItem('chatColor', \`gradient=[${window.cAngle}deg: ${grS.join(', ')}]\`)`.replaceAll('  ', ' ')));
 
         createModal('Gradient Copied!', `<text class="gradientPreview" style="background-image: ${parseCode('gradient=[' + window.cAngle + 'deg: ' + grS.join(', ') + ']')};">The quick brown fox jumped over the lazy dog.</span>`, {
             'OK!': () => document.querySelector('.modal').remove(),
